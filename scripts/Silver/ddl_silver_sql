@@ -1,1 +1,94 @@
+/*
+
+=========
+
+DDL Script: Create Silver Tables
+
+Script Purpose:
+This script creates tables in the 'silver' schema, dropping existing tables
+if they already exist.
+Run this script to re-define the DDL structure of 'bronze' Tables
+===========
+
+/*
+
+
+IF OBJECT_ID('SILVER.crm_cust_info_stage','U') IS NOT NULL
+   DROP TABLE SILVER.crm_cust_info_stage
+CREATE TABLE SILVER.crm_cust_info_stage
+(
+    cst_id VARCHAR(50),
+    cst_key VARCHAR(50),
+    cst_firstname VARCHAR(50),
+    cst_lastname VARCHAR(50),
+    cst_marital_status VARCHAR(20),
+    cst_gndr VARCHAR(20),
+    cst_create_date VARCHAR(50),
+    dwh_create_date DATETIME2 DEFAULT GETDATE() 
+);
+
+IF OBJECT_ID('SILVER.crm_prd_info_stage','U') IS NOT NULL
+   DROP TABLE SILVER.crm_prd_info_stage 
+CREATE TABLE SILVER.crm_prd_info_stage
+(
+    prd_id VARCHAR(50),
+    prd_key VARCHAR(50),
+    prd_nm VARCHAR(100),
+    prd_cost VARCHAR(50),
+    prd_line VARCHAR(20),
+    prd_start_dt VARCHAR(50),
+    prd_end_dt VARCHAR(50),
+    dwh_create_date DATETIME2 DEFAULT GETDATE() 
+
+);
+
+IF OBJECT_ID('SILVER.crm_sales_details_stage','U') IS NOT NULL
+   DROP TABLE SILVER.crm_sales_details_stage
+CREATE TABLE SILVER.crm_sales_details_stage
+(
+    sls_ord_num VARCHAR(50),
+    sls_prd_key VARCHAR(50),
+    sls_cust_id VARCHAR(50),
+    sls_order_dt VARCHAR(50),
+    sls_ship_dt VARCHAR(50),
+    sls_due_dt VARCHAR(50),
+    sls_sales VARCHAR(50),
+    sls_quantity VARCHAR(50),
+    sls_price VARCHAR(50),
+    dwh_create_date DATETIME2 DEFAULT GETDATE() 
+
+);
+
+IF OBJECT_ID('SILVER.erp_CUST_AZ12_stage','U') IS NOT NULL
+   DROP TABLE SILVER.erp_CUST_AZ12_stage
+CREATE TABLE SILVER.erp_CUST_AZ12_stage
+(
+    CID VARCHAR(50),
+    BDATE VARCHAR(50),
+    GEN VARCHAR(20),
+    dwh_create_date DATETIME2 DEFAULT GETDATE() 
+
+);
+
+IF OBJECT_ID('SILVER.erp_LOC_A101_stage','U') IS NOT NULL
+   DROP TABLE SILVER.erp_LOC_A101_stage
+CREATE TABLE SILVER.erp_LOC_A101_stage
+(
+    CID VARCHAR(50),
+    CNTRY VARCHAR(50),
+    dwh_create_date DATETIME2 DEFAULT GETDATE() 
+);
+
+IF OBJECT_ID('SILVER.erp_PX_CAT_G1V2_stage','U') IS NOT NULL
+   DROP TABLE SILVER.erp_PX_CAT_G1V2_stage
+
+CREATE TABLE SILVER.erp_PX_CAT_G1V2_stage
+(
+    ID VARCHAR(50),
+    CAT VARCHAR(50),
+    SUBCAT VARCHAR(50),
+    MAINTENANCE VARCHAR(50),
+    dwh_create_date DATETIME2 DEFAULT GETDATE() 
+);
+
 
